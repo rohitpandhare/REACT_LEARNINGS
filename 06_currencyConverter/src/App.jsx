@@ -15,7 +15,6 @@ function App() {
     //retrive keys from api output---
     const options = Object.keys(currencyInfo);
 
-
     //to swap currencies
     const swap = () => {
       setFrom(to);
@@ -32,35 +31,39 @@ function App() {
           console.error(`Currency info for ${to} is not available.`);
       }
   }
-  
+
     const bgImg = 'https://static.vecteezy.com/system/resources/previews/002/151/430/original/global-currency-exchange-icon-transfer-money-stock-market-abstract-background-vector.jpg';
+
   return (
     <div
         className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat text-black"
-        style={{
-          backgroundImage: `url('${bgImg}')`,
-        }}
+        style={{ backgroundImage: `url('${bgImg}')`}}
     >
-        <h1 className='text-6xl text-purple-100' >Currency Converter</h1>
+    <h1 className='text-6xl text-purple-100' >Currency Converter</h1>
 
     <div className="w-full">
         <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
             <form
-                onSubmit={(e) => {
-                    e.preventDefault();      
-                    convert() 
-                  }}
+              onSubmit={(e) => {
+                e.preventDefault();      
+                convert() //converts amount
+              }}
             >
+
             <div className="w-full mb-1">
                 <InputBox 
                 label="From"
                 amount={amount}
                 currencOptions={options}
+
                 onCurrancyChange={(currency) => setFrom(currency)}
                 selectCurrancy={from}
-                onAmountChange={(amount) => setAmount(amount)}/>
-            </div>
 
+                onAmountChange={(amount) => setAmount(amount)}/> 
+                {/* fetch amount  */}
+            </div>
+      {/* onCurrencyChange and onAmountChange are from inputBox.jsx  */}
+          
             <div className="relative w-full h-0.5">
                 <button
                     type="button"
@@ -69,14 +72,16 @@ function App() {
                 swap
               </button>
             </div>
-
+                {/* reuse of input box component  */}
             <div className="w-full mt-1 mb-4">
                 <InputBox 
                 label="To"
                 amount={convertedAmount}
                 currencOptions={options}
+
                 onCurrancyChange={(currency) => setTo(currency)}
                 selectCurrancy={to}
+
                 amountDisable/>
             </div>
             
